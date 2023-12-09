@@ -7,7 +7,7 @@ data class PartNumber(val number: Int, val row: Int, val startCol: Int, val endC
 
     fun isAdjacentTo(position: Pair<Int, Int>) =
         row >= position.first - 1 &&
-                row <= position.first + 1 &&
-                endCol >= position.second - 1 &&
-                startCol <= position.second + 1
+        row <= position.first + 1 &&
+        endCol >= position.second - 1 &&
+        startCol <= position.second + 1
 }
