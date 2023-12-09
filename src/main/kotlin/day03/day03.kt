@@ -4,6 +4,27 @@ import java.io.File
 
 val input = File("src/main/kotlin/day03/input.txt").readLines()
 
+fun solve1() = part1(input)
+
+fun solve2() = part2(input)
+
+fun part1(input: List<String>): Int {
+    val grid = buildGrid(input)
+    val partNumbers = getPartNumbers(grid)
+
+    return partNumbers.sumOf { it.number }
+}
+
+fun part2(input: List<String>): Int {
+    val grid = buildGrid(input)
+    val partNumbers = getPartNumbers(grid)
+
+    return grid.filter { it.value.isSymbol() }
+        .filter { symbol -> symbolIsAdjacentToTwoPartNumbers(partNumbers, symbol) }
+        .map { symbol -> getAdjacentPartNumbers(partNumbers, symbol) }
+        .sumOf { it[0].number * it[1].number }
+}
+
 fun buildGrid(input: List<String>): Map<Pair<Int, Int>, Char> {
     val grid = mutableMapOf<Pair<Int, Int>, Char>()
 
@@ -58,24 +79,3 @@ fun symbolIsAdjacentToTwoPartNumbers(partNumbers: List<PartNumber>, symbol: Map.
 
 fun getAdjacentPartNumbers(partNumbers: List<PartNumber>, symbol: Map.Entry<Pair<Int, Int>, Char>) =
     partNumbers.filter { it.isAdjacentTo(symbol.key) }
-
-fun solve1() = part1(input)
-
-fun solve2() = part2(input)
-
-fun part1(input: List<String>): Int {
-    val grid = buildGrid(input)
-    val partNumbers = getPartNumbers(grid)
-
-    return partNumbers.sumOf { it.number }
-}
-
-fun part2(input: List<String>): Int {
-    val grid = buildGrid(input)
-    val partNumbers = getPartNumbers(grid)
-
-    return grid.filter { it.value.isSymbol() }
-        .filter { symbol -> symbolIsAdjacentToTwoPartNumbers(partNumbers, symbol) }
-        .map { symbol -> getAdjacentPartNumbers(partNumbers, symbol) }
-        .sumOf { it[0].number * it[1].number }
-}
