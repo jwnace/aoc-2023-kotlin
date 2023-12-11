@@ -8,10 +8,22 @@ fun part1() = solve1(input)
 
 fun part2() = solve2(input)
 
-fun solve1(input: List<String>): Int {
-    return 0
-}
+fun solve1(input: List<String>): Int = input.map { ScratchCard.parse(it) }.sumOf { it.score }
 
 fun solve2(input: List<String>): Int {
-    return 0
+    val cards = input.map { ScratchCard.parse(it) }
+    val cardCounts = cards.associate { it.cardNumber to 1 }.toMutableMap()
+    val minCardNumber = cards.minOf { it.cardNumber }
+    val maxCardNumber = cards.maxOf { it.cardNumber }
+
+    for (cardNumber in minCardNumber..maxCardNumber) {
+        val card = cards.find { it.cardNumber == cardNumber } ?: continue
+        val cardCount = cardCounts[cardNumber] ?: continue
+
+        for (j in 1..card.winCount) {
+            cardCounts[cardNumber + j] = cardCounts[cardNumber + j]!! + cardCount
+        }
+    }
+
+    return cardCounts.values.sum()
 }
