@@ -16,7 +16,7 @@ class Day02Tests {
         )
 
         // act
-        val actual = part1(input)
+        val actual = solve1(input)
 
         // assert
         assertEquals(8, actual)
@@ -24,7 +24,7 @@ class Day02Tests {
 
     @Test
     fun `part1 solution`() {
-        assertEquals(2348, solve1())
+        assertEquals(2348, part1())
     }
 
     @Test
@@ -39,7 +39,7 @@ class Day02Tests {
         )
 
         // act
-        val actual = part2(input)
+        val actual = solve2(input)
 
         // assert
         assertEquals(2286, actual)
@@ -47,6 +47,6 @@ class Day02Tests {
 
     @Test
     fun `part2 solution`() {
-        assertEquals(76008, solve2())
+        assertEquals(76008, part2())
     }
 }

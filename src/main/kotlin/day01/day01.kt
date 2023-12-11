@@ -16,15 +16,15 @@ private val digitStrings = mapOf(
     "nine" to 9,
 )
 
-fun solve1() = part1(input)
+fun part1() = solve1(input)
 
-fun solve2() = part2(input)
+fun part2() = solve2(input)
 
-fun part1(input: List<String>): Int =
+fun solve1(input: List<String>): Int =
     input.map { line -> line.filter { c -> c.isDigit() } }
         .sumOf { "${it.first()}${it.last()}".toInt() }
 
-fun part2(input: List<String>): Int {
+fun solve2(input: List<String>): Int {
     var sum = 0
 
     for (line in input) {
